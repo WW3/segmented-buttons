@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Segemented Control</title>
+</head>
+<body>
+    <main>
+        <h1>Segmented Controls</h1>
+        <div class="flex space-around">
+            <div>
+                <h2>Single selection</h2>
+                <div class="flex" data-segmented-control="single">
+                    <button>Compact View</button>
+                    <button>Balanced View</button>
+                    <button>Comfortable View</button>
+                </div>
+            </div>
+            <div>
+                <h2>Multi selection</h2>
+                <div class="flex" role="group" aria-label="actions">
+                    <button role="checkbox">Compact View</button>
+                    <button role="checkbox">Balanced View</button>
+                    <button role="checkbox">Comfortable View</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+    <script>
+        applyRovingTabindex("[data-segmented-control='single']", 1, "views");
+    </script>
+</body>
+</html>

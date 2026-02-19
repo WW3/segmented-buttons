@@ -1,0 +1,41 @@
+main {
+    padding: 2rem; 
+  }
+  .flex {
+    display: flex;
+    flex-flow: wrap;
+    &.space-around {
+      justify-content: space-between;
+    }
+    & button {
+      display: block;
+      &[aria-checked="true"] {
+        border-color: darkolivegreen;
+        padding: .75em 2.25em .75em .75em;
+        transform: scale(1.1);
+        position: relative;
+        z-index: 1;
+        &:after {
+            content: " ✪ ";
+            color: darkolivegreen;
+            width: 1rem;
+            height: 1rem;
+            position: absolute;
+            right: 0.5rem;
+            top: 0.5rem;
+        }
+      }
+      &[aria-checked="false"] {
+        padding: .75em 1.5em .75em 1.5em;
+        position: relative;     
+        &:focus:after, &:hover:after {
+            content: " ⚬ ";
+             width: 1rem;
+            height: 1rem;
+            position: absolute;
+            right: 0;
+            top: 0.5rem;
+        }
+      }
+    }
+  }
