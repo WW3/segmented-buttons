@@ -9,58 +9,42 @@ main {
     }
     & button {
       display: block;
+      padding: .75em 2.25em .75em .75em;
+      position: relative;
       &:focus, &:hover {
         background-color: #f8f8f8;
-        outline-offset: -1px;
+        outline-width: 2px;
+        outline-offset: 1px;
+        outline-color: darkolivegreen;
+        outline-style: dotted;
       }
-      &[aria-checked="true"] {
-        border-color: darkolivegreen;
-        color: darkolivegreen;
-        box-shadow: 0 0 0 2px #556b2f; 
-        padding: .75em 2.25em .75em .75em;
-        position: relative;
-        z-index: 1;
-        &:after {
-            content: " ✪ ";
-            color: darkolivegreen;
-            width: 1rem;
-            height: 1rem;
-            position: absolute;
-            right: 0.5rem;
-            top: 0.5rem;
-        }
-      }
-      &[aria-checked="false"] {
-        padding: .75em 1.5em .75em 1.5em;
-        position: relative;     
-        &:focus:after, &:hover:after {
-            content: " ⚬ ";
-            width: 1rem;
-            height: 1rem;
-            position: absolute;
-            right: 0;
-            top: 0.5rem;
-        }
-      }
-    }
-    &[data-segmented-control="multiple"] {
-      & button {
-        padding: .75em 2.25em .75em .75em;
-      }
-      & button:after,
-      & button:hover:after,
-      & button:focus:after {
+      &:after {
         width: 1rem;
         height: 1rem;
         position: absolute;
         right: 0.5rem;
         top: 0.5rem;
       }
+      &[aria-checked="true"] {
+        border-color: darkolivegreen;
+        color: darkolivegreen;
+      }
+
+    }
+    &[data-segmented-control="multiple"] {
       & button[aria-checked="false"]:after {
         content: "☐";
       }
       & button[aria-checked="true"]:after {
         content: "☑";
+      }
+    }
+    &[data-segmented-control="single"] {
+      & button[aria-checked="false"]:after {
+        content: "◯";
+      }
+      & button[aria-checked="true"]:after {
+        content: "⦿";
       }
     }
   }
