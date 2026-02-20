@@ -9,8 +9,13 @@ main {
     }
     & button {
       display: block;
+      &:focus, &:hover {
+        background-color: #f8f8f8;
+        outline-offset: -1px;
+      }
       &[aria-checked="true"] {
         border-color: darkolivegreen;
+        color: darkolivegreen;
         box-shadow: 0 0 0 2px #556b2f; 
         padding: .75em 2.25em .75em .75em;
         position: relative;
@@ -36,6 +41,26 @@ main {
             right: 0;
             top: 0.5rem;
         }
+      }
+    }
+    &[data-segmented-control="multiple"] {
+      & button {
+        padding: .75em 2.25em .75em .75em;
+      }
+      & button:after,
+      & button:hover:after,
+      & button:focus:after {
+        width: 1rem;
+        height: 1rem;
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+      }
+      & button[aria-checked="false"]:after {
+        content: "☐";
+      }
+      & button[aria-checked="true"]:after {
+        content: "☑";
       }
     }
   }
