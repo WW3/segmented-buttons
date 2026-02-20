@@ -117,3 +117,63 @@ function applyRovingTabindex(selector, buttonIndex, ariaLabel) {
 
   return true;
 }
+
+/**
+ * Applies multi-select segmented control behavior to all nodes matching the selector.
+ * Containers must have only buttons as direct children. Buttons act as checkboxes (toggle aria-checked on click).
+ * @param {string} selector - CSS selector for container element(s)
+ * @param {number[]} checkedIndices - Indices of buttons to set aria-checked="true". Others get "false". Ignored if empty.
+ * @param {string|null|undefined} [ariaLabel] - Optional label for the group. Sanitized before being set.
+ * @returns {number} - Number of containers that were successfully configured
+ */
+function applyMultipleSegmentedControl(selector, checkedIndices, ariaLabel) {
+  const nodes = document.querySelectorAll(selector);
+  let configured = 0;
+
+  nodes.forEach((container) => {
+    const children = Array.from(container.children);
+    if (children.length === 0) return;
+
+    const allButtons = children.every((el) => el.tagName === "BUTTON");
+    if (!allButtons) return;
+
+    const role = container.getAttribute("role");
+    if (!role || role !== "group") {
+      container.setAttribute("role", "group");
+    }
+
+    children.forEach((btn) => {
+      if (btn.getAttribute("role") !== "checkbox") {
+        btn.setAttribute("role", "checkbox");
+      }
+    });
+
+    const validSet =
+      Array.isArray(checkedIndices) && checkedIndices.length > 0
+        ? new Set(
+            checkedIndices.filter(
+              (i) => typeof i === "number" && i >= 0 && i < children.length
+            )
+          )
+        : new Set();
+    children.forEach((btn, i) => {
+      btn.setAttribute("aria-checked", validSet.has(i) ? "true" : "false");
+    });
+
+    const label = sanitizeAriaLabel(ariaLabel);
+    if (label) {
+      container.setAttribute("aria-label", label);
+    }
+
+    children.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const current = btn.getAttribute("aria-checked");
+        btn.setAttribute("aria-checked", current === "true" ? "false" : "true");
+      });
+    });
+
+    configured += 1;
+  });
+
+  return configured;
+}

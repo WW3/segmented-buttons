@@ -20,10 +20,10 @@
             </div>
             <div>
                 <h2>Multi selection</h2>
-                <div class="flex" role="group" aria-label="actions">
-                    <button role="checkbox">Compact View</button>
-                    <button role="checkbox">Balanced View</button>
-                    <button role="checkbox">Comfortable View</button>
+                <div class="flex" data-segmented-control="multiple">
+                    <button>Compact View</button>
+                    <button>Balanced View</button>
+                    <button>Comfortable View</button>
                 </div>
             </div>
         </div>
@@ -31,6 +31,11 @@
     <script src="script.js"></script>
     <script>
         applyRovingTabindex("[data-segmented-control='single']", 1, "views");
+        applyMultipleSegmentedControl(
+            "[data-segmented-control='multiple']",
+            [0, 2],
+            "View options"
+        );
     </script>
 </body>
 </html>
