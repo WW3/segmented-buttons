@@ -1,5 +1,11 @@
+:root {
+  --checked-color: darkolivegreen;
+  --hover-bgcolor: #f8f8f8;
+}
 main {
-    padding: 2rem; 
+  padding: 2rem; 
+  width: 80vw;
+  margin: 0 auto;
   }
   .flex {
     display: flex;
@@ -12,10 +18,10 @@ main {
       padding: .75em 2.25em .75em .75em;
       position: relative;
       &:focus, &:hover {
-        background-color: #f8f8f8;
+        background-color: var(--hover-bgcolor);
         outline-width: 2px;
         outline-offset: 1px;
-        outline-color: darkolivegreen;
+        outline-color: var(--checked-color);
         outline-style: dotted;
       }
       &:after {
@@ -25,9 +31,9 @@ main {
         right: 0.5rem;
         top: 0.5rem;
       }
-      &[aria-checked="true"] {
-        border-color: darkolivegreen;
-        color: darkolivegreen;
+      &[aria-checked="true"]:after {
+        color: var(--checked-color);
+        /*border-color: var(--checked-color);*/
       }
 
     }
@@ -48,3 +54,4 @@ main {
       }
     }
   }
+}
