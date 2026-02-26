@@ -59,3 +59,9 @@ main {
     }
   }
 }
+p {
+  line-height: 1.5;
+  max-width: 80ch;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
